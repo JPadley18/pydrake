@@ -1,4 +1,3 @@
-sudo: required
 language: python
 dist: xenial
 python:
@@ -10,4 +9,4 @@ virtualenv:
 install:
   - python setup.py install --user
 script:
-  - tests.py
+  - python tests.py
