@@ -10,4 +10,4 @@ virtualenv:
 install:
   - python setup.py install --user
 script:
-  - tests/tests.py
+  - tests.py

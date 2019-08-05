@@ -17,15 +17,17 @@ This file contains tests for all of the classes in PyDrake
 There is no way to test with live endpoint data, so these tests will test the
 parsing capability of all functions using sample data.
 """
-import sys
-sys.path.append(".")
+
 from pydrake.summonerv4 import Summoner
 from pydrake.leaguev4 import RankedSummoner
 from pydrake.matchv4 import MatchList, Match
 from pydrake.errors import APIError
 from pydrake.ddragon import *
 
+from os import path
 import json
+
+here = path.abspath(path.dirname(__file__))
 
 
 def get_attrs(obj):
@@ -62,7 +64,7 @@ def evaluate(obj):
 
 # /summoner/v4/summoners/by-name
 print("Now Testing: /summoner/v4/summoners/by-name")
-with open("summoner-v4-summoners-by-name.json") as raw:
+with open(path.join(here, "tests/summoner-v4-summoners-by-name.json")) as raw:
     data = json.loads(raw.read())
 
 summoner = Summoner(data, "euw1")
@@ -70,14 +72,14 @@ evaluate(summoner)
 
 # /league/v4/entries/by-summoner
 print("Now Testing: /league/v4/entries/by-summoner")
-with open("league-v4-entries-by-summoner.json") as raw:
+with open(path.join(here, "tests/league-v4-entries-by-summoner.json")) as raw:
     data = json.loads(raw.read())
 
 evaluate(RankedSummoner(data, summoner))
 
 # ddragon/champion.json
 print("Now Testing: ddragon/champion.json")
-with open("ddragon-champion.json") as raw:
+with open(path.join(here, "tests/ddragon-champion.json")) as raw:
     data = json.loads(raw.read())
 
 evaluate(Champion(data['data']['Aatrox']))
