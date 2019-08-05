@@ -1,0 +1,12 @@
+language: python
+dist: xenial
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+virtualenv:
+  system_site_packages: true
+install:
+  - python setup.py install --user
+script:
+  - tests/tests.py

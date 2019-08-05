@@ -74,14 +74,19 @@ class PyDrake:
             if r.status_code == 401:
                 raise APIError("401 Unauthorized: Your API key may be invalid")
             elif r.status_code == 403:
-                raise APIError("403 Forbidden: The endpoint you tried to reach may not exist")
+                raise APIError("403 Forbidden: That endpoint may not exist or your API key may have expired")
             elif r.status_code == 404:
                 raise APIError("404 Not Found: {}".format(r.json()['status']['message']))
             elif r.status_code == 429:
                 # TODO: Rate-limiting logic
                 pass
-        else:
-            return r.json()
+            elif r.status_code == 503:
+                raise APIError("503 Service Unavailable: failed to reach API endpoint")
+
+        ret = r.json()
+        if ret is None:
+            raise APIError("No data received from API")
+        return ret
 
     @property
     def get_champion_by_id(self):
