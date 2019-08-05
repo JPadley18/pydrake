@@ -21,6 +21,7 @@ from .summonerv4 import Summoner
 from .leaguev4 import RankedSummoner
 from .matchv4 import MatchList, Match
 from .errors import APIError
+from .ddragon import *
 
 # Supported rate_limit_mode values
 supported_modes = ["off", "soft", "hard"]
@@ -77,10 +78,17 @@ class PyDrake:
             elif r.status_code == 404:
                 raise APIError("404 Not Found: {}".format(r.json()['status']['message']))
             elif r.status_code == 429:
-                # Rate-limiting logic
+                # TODO: Rate-limiting logic
                 pass
         else:
             return r.json()
+
+    @property
+    def get_champion_by_id(self):
+        """
+        Wrapper function for Data Dragon
+        """
+        return get_champion_by_id
 
     def get_summoner_by_name(self, name, region):
         """
