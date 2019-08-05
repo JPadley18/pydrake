@@ -4,7 +4,5 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
-install:
-  - ~/.virtualenv/python-env/bin/python setup.py install --user
 script:
   - python tests.py
