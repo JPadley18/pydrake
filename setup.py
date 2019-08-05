@@ -23,8 +23,9 @@ with open(path.join(here, "README.md")) as readme:
 
 setup(
     name="pydrake",
-    version="0.1.1",
+    version="0.1.2",
     long_description=long_desc,
+    long_description_content_type='text/markdown',
     url="https://github.com/JPadley18/pydrake",
     author="Jacob Padley",
     author_email="jacob5180@hotmail.co.uk",
