@@ -19,6 +19,7 @@ import requests
 
 from .summonerv4 import Summoner
 from .leaguev4 import RankedSummoner
+from .matchv4 import MatchList, Match
 from .errors import APIError
 
 # Supported rate_limit_mode values
@@ -92,11 +93,30 @@ class PyDrake:
         response = self._call_api(region, "summoner/v4/summoners/by-name/{}".format(name))
         return Summoner(response, region)
 
-    def get_summoner_rank_data(self, summoner):
+    def get_ranked_summoner(self, summoner):
         """
-        Retrieves the ranking information for the given summoner
+        Retrieves the ranking information for the given summoner and returns a
+        RankedSummoner object containing the new information
         :param summoner:
         :return: A RankedSummoner object
         """
         response = self._call_api(summoner.region, "league/v4/entries/by-summoner/{}".format(summoner.id))
         return RankedSummoner(response, summoner)
+
+    def get_summoner_matchlist(self, summoner):
+        """
+        Retrieves the matchlist for the given summoner
+        :param summoner: The summoner to retrieve match data for
+        :return: A MatchList object
+        """
+        response = self._call_api(summoner.region, "match/v4/matchlists/by-account/{}".format(summoner.account_id))
+        return MatchList(response)
+
+    def get_match_from_matchlist(self, match):
+        """
+        Retrieves the full data for a match from an item in a MatchList object
+        :param match: The MatchListMatch object to retrieve further data for
+        :return: a Match object containing all of the data about the match
+        """
+        response = self._call_api(match.platform_id, "match/v4/matches/{}".format(match.game_id))
+        return Match(response)

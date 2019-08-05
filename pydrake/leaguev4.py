@@ -32,13 +32,22 @@ class RankedSummoner(Summoner):
         Summoner.__init__(self, summoner._raw, summoner.region)
         self._ranks = {x['queueType']: SummonerRanking(x) for x in data}
 
-    def get_queue(self, queue_name):
+    def get_ranked_queue(self, queue_name):
         """
         Returns the data for a specified league queue
-        :param queue_name: The name of the queue
+        :param queue_name: The name of the queue. Known queue names are:
+        - RANKED_FLEX_SR
+        - RANKED_FLEX_TT
+        - RANKED_TFT
+        - RANKED_SOLO_5x5
+        This function will raise a ValueError if the specified queue is not
+        found. These values are case sensitive
         :return: a SummonerRanking object containing the data from Riot
         """
-        return self._ranks[queue_name]
+        try:
+            return self._ranks[queue_name]
+        except KeyError:
+            raise ValueError("{} does not have any data for queue: {}".format(self.name, queue_name))
 
 
 class SummonerRanking:
@@ -60,3 +69,6 @@ class SummonerRanking:
         self.fresh_blood = data['freshBlood']
         self.hot_streak = data['hotStreak']
         self.rank = numerals[self.rank_str]
+
+    def __str__(self):
+        return "{} {} - {} LP".format(self.tier, self.rank_str, self.league_points)
