@@ -30,7 +30,9 @@ setup(
     author_email="jacob5180@hotmail.co.uk",
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python 3.7",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.5",
     ],
     keywords="riot league legends wrapper api pydrake drake",
     packages=find_packages(),
