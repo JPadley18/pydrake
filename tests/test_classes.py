@@ -24,8 +24,11 @@ from pydrake.matchv4 import MatchList, Match
 from pydrake.errors import APIError
 from pydrake.ddragon import *
 
+from os import path
 import unittest
 import json
+
+here = path.abspath(path.dirname(__file__))
 
 
 def get_attrs(obj):
@@ -52,11 +55,11 @@ def has_null_attrs(obj):
 class TestClasses(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        with open("summoner-v4-summoners-by-name.json") as raw:
+        with open(path.join(here, "summoner-v4-summoners-by-name.json")) as raw:
             cls.summonerv4byname = json.loads(raw.read())
-        with open("league-v4-entries-by-summoner.json") as raw:
+        with open(path.join(here, "league-v4-entries-by-summoner.json")) as raw:
             cls.leaguev4bysummoner = json.loads(raw.read())
-        with open("ddragon-champion.json") as raw:
+        with open(path.join(here, "ddragon-champion.json")) as raw:
             cls.ddragonchampions = json.loads(raw.read())
 
     def test_summoner_v4_summoners_by_name(self):
