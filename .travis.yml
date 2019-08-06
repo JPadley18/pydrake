@@ -7,4 +7,4 @@ python:
 install:
   - pip install requests
 script:
-  - python tests.py
+  - python -m unittest tests/test_classes.py

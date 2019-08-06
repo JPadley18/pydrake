@@ -110,7 +110,7 @@ class PyDrake:
         """
         Retrieves the ranking information for the given summoner and returns a
         RankedSummoner object containing the new information
-        :param summoner:
+        :param summoner: The old summoner object to extend
         :return: A RankedSummoner object
         """
         response = self._call_api(summoner.region, "league/v4/entries/by-summoner/{}".format(summoner.id))
