@@ -17,7 +17,6 @@ This file contains tests for all of the classes in PyDrake
 There is no way to test with live endpoint data, so these tests will test the
 parsing capability of all functions using sample data.
 """
-
 from pydrake.summonerv4 import Summoner
 from pydrake.leaguev4 import RankedSummoner
 from pydrake.matchv4 import MatchList, Match

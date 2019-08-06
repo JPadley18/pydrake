@@ -6,5 +6,9 @@ python:
   - "3.7"
 install:
   - pip install requests
+  - pip install coverage
+  - pip install codecov
 script:
-  - python -m unittest tests/test_classes.py
+  - python -m coverage run tests/test_classes.py
+after_success:
+  - python -m codecov
