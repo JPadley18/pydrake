@@ -22,6 +22,7 @@ from pydrake.leaguev4 import RankedSummoner
 from pydrake.matchv4 import MatchList, Match
 from pydrake.errors import APIError
 from pydrake.ddragon import *
+from pydrake import PyDrake
 
 from os import path
 import unittest

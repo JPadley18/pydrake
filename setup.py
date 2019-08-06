@@ -18,7 +18,7 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, "README.md")) as readme:
+with open(path.join(here, "README.rst")) as readme:
     long_desc = readme.read()
 
 setup(
