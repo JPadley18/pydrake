@@ -9,6 +9,6 @@ install:
   - pip install coverage
   - pip install codecov
 script:
-  - python -m coverage run tests/test_classes.py
+  - python -m coverage run test_classes.py
 after_success:
   - python -m codecov

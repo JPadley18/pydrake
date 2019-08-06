@@ -27,7 +27,7 @@ from os import path
 import unittest
 import json
 
-here = path.abspath(path.dirname(__file__))
+here = path.join(path.abspath(path.dirname(__file__)), "tests/")
 
 
 def get_attrs(obj):
