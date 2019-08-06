@@ -60,11 +60,14 @@ class TestClasses(unittest.TestCase):
             cls.leaguev4bysummoner = json.loads(raw.read())
         with open(path.join(here, "ddragon-champion.json")) as raw:
             cls.ddragonchampions = json.loads(raw.read())
+        with open(path.join(here, "match-v4-matches.json")) as raw:
+            cls.matchv4matches = json.loads(raw.read())
+        with open(path.join(here, "match-v4-matchlists-by-account.json")) as raw:
+            cls.matchv4matchlists = json.loads(raw.read())
 
     def test_summoner_v4_summoners_by_name(self):
         summoner = Summoner(self.summonerv4byname, "euw1")
         self.assertFalse(has_null_attrs(summoner))
-        self.assertEqual(len(get_attrs(summoner)), 8)
 
         self.assertEqual(summoner.name, "Janoccoli")
         self.assertEqual(summoner.region, "euw1")
@@ -74,14 +77,11 @@ class TestClasses(unittest.TestCase):
         summoner = Summoner(self.summonerv4byname, "euw1")
         ranked = RankedSummoner(self.leaguev4bysummoner, summoner)
         self.assertFalse(has_null_attrs(ranked))
-        self.assertEqual(len(get_attrs(ranked)), 9)
 
         solo = ranked.get_ranked_queue("RANKED_SOLO_5x5")
         self.assertFalse(has_null_attrs(solo))
 
         self.assertEqual(len(ranked._ranks), 2)
-        for x in ranked._ranks.values():
-            self.assertEqual(len(get_attrs(x)), 13)
 
         self.assertEqual(solo.rank, 3)
         self.assertEqual(solo.tier, "BRONZE")
@@ -93,7 +93,20 @@ class TestClasses(unittest.TestCase):
 
         for x in champion_objs:
             self.assertFalse(has_null_attrs(x))
-            self.assertEqual(len(get_attrs(x)), 8)
+
+    def test_match_v4_matches(self):
+        match = Match(self.matchv4matches)
+        self.assertFalse(has_null_attrs(match))
+        self.assertEqual(len(match.participants), 10)
+        self.assertEqual(len(match.teams), 2)
+
+    def test_match_v4_matchlists_by_account(self):
+        matchlist = MatchList(self.matchv4matchlists)
+        self.assertEqual(len(matchlist._matches), 100)
+        self.assertFalse(has_null_attrs(matchlist))
+
+        for x in matchlist._matches:
+            self.assertFalse(has_null_attrs(x))
 
 
 if __name__ == "__main__":
