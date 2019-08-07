@@ -12,7 +12,7 @@ There are three types of API keys available from Riot:
   These keys are generally used for testing API endpoints or libraries (like this one).
   They must be regenerated every 24 hours and have a heavy rate limit of 10 requests per
   second and up to 100 per 2 minutes.
-`Personal Projcet Key <https://developer.riotgames.com/app-type>`_
+`Personal Project Key <https://developer.riotgames.com/app-type>`_
   These keys never expire, but require an application to Riot in order to obtain one.
   They are also subject to the same rate limiting as Development Keys.
 `Application Project Key <https://developer.riotgames.com/app-type>`_
