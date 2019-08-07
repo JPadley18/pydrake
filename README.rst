@@ -14,4 +14,8 @@ PyDrake - the League of Legends API Wrapper
     :alt: CodeClimate
 
 Experimental Python wrapper for the Riot Games API.
-Check out the `full docs <https://pydrake.readthedocs.io/en/latest/>`_
+
+Documentation
+-------------
+Check out the `Getting Started <https://pydrake.readthedocs.io/en/latest/starting.html>`_
+page to start out using PyDrake.

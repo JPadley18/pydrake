@@ -2,6 +2,8 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Documentation Contents:
 
    starting
+   advanced
+   full

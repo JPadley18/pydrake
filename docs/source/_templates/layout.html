@@ -1,10 +1,29 @@
 {% extends "!layout.html" %}
-  {% block footer %} {{ super() }}
+  {% block extrahead %} {{ super() }}
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
 
   <style>
-    /* Sidebar header (and topbar for mobile) */
+    .wy-nav-side {
+      background-image: url("https://vignette.wikia.nocookie.net/leagueoflegends/images/b/ba/Elder_Dragon_Ingame.jpg/revision/latest?cb=20160427204138");
+      background-size: cover;
+      background-position: center;
+    }
     .wy-side-nav-search, .wy-nav-top {
+      background-color: #c95100;
+    }
+    .wy-side-nav-search{
+      background: transparent;
+    }
+    .wy-side-nav-search>a{
+      border-radius: 10px;
       background: #c95100;
+    }
+    .wy-menu{
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    h1, h2{
+      font-family: "Monsterrat", sans-serif;
     }
   </style>
 {% endblock %}

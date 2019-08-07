@@ -39,3 +39,26 @@ Now in order to access Riot's API, all you have to do is create a ``PyDrake`` ob
 	from pydrake import PyDrake
 
 	api = PyDrake("my_api_key")
+
+Basic API Interaction
+---------------------
+Let's try using some of the basic functionality of PyDrake. This library is object-oriented,
+and adds a karge amount of abstraction to the library. This allows you to focus on using the
+API rather than having to process the data yourself. Let's first try to gather your summoner
+information.
+
+.. code:: python
+	
+	me = api.get_summoner_by_name("Summoner Name", "Region Code")
+	print(me.level)
+
+This will print your summoner level to the console.
+
+::
+	
+	>> 103
+
+.. note:: For a full list of supported region codes, see :ref:`region_codes`.
+
+Congratulations! You are now ready to use PyDrake! For more advanced API functionality,
+see :ref:`advanced_api`.
