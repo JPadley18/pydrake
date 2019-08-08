@@ -58,8 +58,8 @@ class Champion:
 
 
 def get_champion_by_id(id):
-    """
-    Retrieves a Champion object with the given id
+    """Retrieves a Champion object from the Riot database with the given id
+
     :param id: the ID of the champion. Raises a ValueError if none are found
     :return: a Champion object with the given ID
     """

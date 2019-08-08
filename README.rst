@@ -1,3 +1,4 @@
+===========================================
 PyDrake - the League of Legends API Wrapper
 ===========================================
 .. image:: https://travis-ci.com/JPadley18/pydrake.svg?branch=master

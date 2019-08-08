@@ -33,20 +33,29 @@ BASE_URL = "https://{}.api.riotgames.com/lol/"
 
 
 class PyDrake:
+    """PyDrake is the main API wrapper class that will be used to call all
+    Riot Games API functions
+
+    :param api_key: Your Riot Games API Key (to retrieve this, see
+        :ref:`api_keys`)
+    :param rate_limit_mode: The rate-limiting mode to use
+        Can be set to:
+
+        +----------+---------------------------------------------------------------+
+        | ``off``  | | Default value, use no client-side                           |
+        |          | | rate-limiting                                               |
+        +----------+---------------------------------------------------------------+
+        | ``soft`` | | PyDrake will attempt to execute a request, on receiving a   |
+        |          | | 429 response code it will wait the amount of time specified |
+        |          | | in the Retry-After response header                          |
+        +----------+---------------------------------------------------------------+
+        | ``hard`` | | PyDrake will raise an APIError on receiving a 429           |
+        |          | | response code                                               |
+        +----------+---------------------------------------------------------------+
+
+    .. warning:: At the current time, ``rate_limit_mode`` is not supported
+    """
     def __init__(self, api_key, rate_limit_mode="off"):
-        """
-        PyDrake is the main API wrapper class that will be used to call all
-        Riot Games API functions
-        :param api_key: Your Riot Games API Key
-        :param rate_limit_mode: The rate-limiting mode to use
-            Can be set to:
-                - "off": default value, use no client-side rate-limiting
-                - "soft": PyDrake will attempt to execute a request, on receiving a
-                        429 response code it will wait the amount of time specified
-                        in the Retry-After response header
-                - "hard": PyDrake will raise an APIError on receiving a 429
-                        response code
-        """
         self.api_key = api_key
         if rate_limit_mode.lower() in supported_modes:
             self.rate_limit_mode = rate_limit_mode
@@ -90,46 +99,54 @@ class PyDrake:
 
     @property
     def get_champion_by_id(self):
-        """
-        Wrapper function for Data Dragon
+        """See :func:`pydrake.ddragon.get_champion_by_id`
         """
         return get_champion_by_id
 
     def get_summoner_by_name(self, name, region):
-        """
-        Retrieve statistics about a summoner by their name. Returns a Summoner
-        object with all information retrieved from the API
-        :param name: The name of the summoner to retrieve
+        """Retrieve statistics about a summoner which will be found by the
+        given name.
+
+        :param name: The name of the summoner
         :param region: The region code that the account belongs to
-        :return: A Summoner object
+        :return: A :class:`pydrake.summonerv4.Summoner` object containing the
+            parsed data from the API
+
+        .. warning:: Summoner names are case-sensitive
+
+        .. note:: For a full list of supported region codes, see
+                :ref:`region_codes`.
         """
         response = self._call_api(region, "summoner/v4/summoners/by-name/{}".format(name))
         return Summoner(response, region)
 
     def get_ranked_summoner(self, summoner):
-        """
-        Retrieves the ranking information for the given summoner and returns a
+        """Retrieves the ranking information for the given summoner and returns a
         RankedSummoner object containing the new information
+
         :param summoner: The old summoner object to extend
-        :return: A RankedSummoner object
+        :return: A :class:`pydrake.leaguev4.RankedSummoner` object
         """
         response = self._call_api(summoner.region, "league/v4/entries/by-summoner/{}".format(summoner.id))
         return RankedSummoner(response, summoner)
 
     def get_summoner_matchlist(self, summoner):
-        """
-        Retrieves the matchlist for the given summoner
+        """Retrieves the matchlist (recent match history ~150 games) for the
+        given summoner
+
         :param summoner: The summoner to retrieve match data for
-        :return: A MatchList object
+        :return: A :class:`pydrake.matchv4.MatchList` object
         """
         response = self._call_api(summoner.region, "match/v4/matchlists/by-account/{}".format(summoner.account_id))
         return MatchList(response)
 
     def get_match_from_matchlist(self, match):
-        """
-        Retrieves the full data for a match from an item in a MatchList object
-        :param match: The MatchListMatch object to retrieve further data for
-        :return: a Match object containing all of the data about the match
+        """Retrieves the full data for a match from an item in a MatchList object
+
+        :param match: The entry from a MatchList object to retrieve further
+            data for
+        :return: a :class:`pydrake.matchv4.Match` object containing all of the
+            data about the match
         """
         response = self._call_api(match.platform_id, "match/v4/matches/{}".format(match.game_id))
         return Match(response)

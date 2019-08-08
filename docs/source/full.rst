@@ -2,7 +2,38 @@
 Full API Reference
 ==================
 Welcome to the full API reference, here you can find the specific documentation
-for every public function in PyDrake.
+for every public function in PyDrake. This section of the documentation is
+organised into Riot's API interfaces.
+
+.. _pydrake_class:
+
+The PyDrake Class
+-----------------
+
+.. autoclass:: pydrake.PyDrake
+	:members:
+
+.. _summoner_v4:
+
+Summoner-V4
+-----------
+
+.. _league_v4:
+
+League-V4
+---------
+
+.. _match_v4:
+
+Match-V4
+--------
+
+.. _data_dragon:
+
+Data Dragon
+-----------
+
+.. autofunction:: pydrake.ddragon.get_champion_by_id
 
 .. _region_codes:
 

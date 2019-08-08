@@ -4,6 +4,8 @@ Getting Started
 
 To get started with PyDrake, you will need to register for an API key.
 
+.. _api_keys:
+
 API Keys
 --------
 There are three types of API keys available from Riot:
@@ -43,7 +45,7 @@ Now in order to access Riot's API, all you have to do is create a ``PyDrake`` ob
 Basic API Interaction
 ---------------------
 Let's try using some of the basic functionality of PyDrake. This library is object-oriented,
-and adds a karge amount of abstraction to the library. This allows you to focus on using the
+and adds a large amount of abstraction to the library. This allows you to focus on using the
 API rather than having to process the data yourself. Let's first try to gather your summoner
 information.
 
@@ -51,6 +53,8 @@ information.
 	
 	me = api.get_summoner_by_name("Summoner Name", "Region Code")
 	print(me.level)
+
+.. warning:: Summoner names are case-sensitive
 
 This will print your summoner level to the console.
 
