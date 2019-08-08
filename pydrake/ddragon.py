@@ -42,6 +42,16 @@ def get_static_data(extension):
 
 
 class Champion:
+    """Encapsulates information about a Champion from the Data Dragon API
+
+    :ivar id: The Champion's ID
+    :ivar name: The Champion's name (e.g. `Kai'Sa`)
+    :ivar title: The Champion's title (e.g. `Daughter of the Void`)
+    :ivar blurb: The Champion's description
+
+    .. warning:: This should only be created through
+        :meth:`pydrake.PyDrake.get_champion_by_id`
+    """
     def __init__(self, data):
         """
         Encapsulates information about a Champion from Data Dragon
@@ -58,10 +68,13 @@ class Champion:
 
 
 def get_champion_by_id(id):
-    """Retrieves a Champion object from the Riot database with the given id
+    """Retrieves a Champion object from the Riot database with the given ID
 
-    :param id: the ID of the champion. Raises a ValueError if none are found
-    :return: a Champion object with the given ID
+    :param id: the ID of the champion.
+    :return: a :class:`pydrake.ddragon.Champion` object with the given ID
+
+    .. warning:: This should only be called through
+        :meth:`pydrake.PyDrake.get_champion_by_id`
     """
     raw = get_static_data("champion.json")
     champion_raw = next((x for x in raw['data'].values() if x['key'] == str(id)), None)

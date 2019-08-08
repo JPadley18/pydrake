@@ -33,6 +33,8 @@ Match-V4
 Data Dragon
 -----------
 
+.. autoclass:: pydrake.ddragon.Champion
+
 .. autofunction:: pydrake.ddragon.get_champion_by_id
 
 .. _region_codes:
