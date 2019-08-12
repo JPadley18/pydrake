@@ -23,7 +23,8 @@ with open(path.join(here, "README.rst")) as readme:
 
 setup(
     name="pydrake",
-    version="0.1.2",
+    version="0.2.0",
+    description="Experimental Python API Wrapper for the Riot Games API.",
     long_description=long_desc,
     long_description_content_type='text/markdown',
     url="https://github.com/JPadley18/pydrake",
