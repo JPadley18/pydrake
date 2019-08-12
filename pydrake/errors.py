@@ -23,3 +23,19 @@ class APIError(Exception):
     Riot API
     """
     pass
+
+
+class RateLimitError(Exception):
+    """
+    This will be raised whenever a 429 response code is received from the API
+    in `hard` rate-limit mode.
+    """
+    pass
+
+
+class RateLimitWarning(Warning):
+    """
+    This will be raised whenever a 429 response code is received from the API
+    in `soft` rate-limit mode.
+    """
+    pass
